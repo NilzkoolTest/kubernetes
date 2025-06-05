@@ -416,6 +416,13 @@ type DeploymentSpec struct {
 	// reason will be surfaced in the deployment status. Note that progress will
 	// not be estimated during the time a deployment is paused. Defaults to 600s.
 	ProgressDeadlineSeconds *int32 `json:"progressDeadlineSeconds,omitempty" protobuf:"varint,9,opt,name=progressDeadlineSeconds"`
+
+	// rolloutPolicy specifies an *advanced rollout strategy* for this Deployment,
+    	// such as BlueGreen or Canary 
+    	// If unset, the controller behaves exactly as today.  
+    	// +optional
+    	// +kubebuilder:validation:Enum=BlueGreen;Canary
+    	RolloutPolicy string `json:"rolloutPolicy,omitempty" protobuf:"bytes,10,opt,name=rolloutPolicy"`
 }
 
 const (
